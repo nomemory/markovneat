@@ -57,3 +57,8 @@ BULL
 BULL
 ... and so on
 ```
+
+# Example 2 - Creating higer-order markov chains
+
+We define 3 states **A**, **B**, and **C** . 
+
