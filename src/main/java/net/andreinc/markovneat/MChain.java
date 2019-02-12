@@ -40,6 +40,11 @@ public class MChain<T> {
         chain.get(state).add(1, element);
     }
 
+    public void add(final MState<T> state, final T element, double weight) {
+        chain.putIfAbsent(state, new MProb<>());
+        chain.get(state).add(weight, element);
+    }
+
     /**
      * Trains the Markov chain with a sequence of elements.
      *

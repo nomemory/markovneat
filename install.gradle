@@ -10,8 +10,8 @@ install {
                 groupId 'net.andreinc.markovneat'
                 artifactId 'markovneat'
 
-                name 'MarkovNeat' // YOUR LIBRARY NAME
-                description 'Markov Chain java implementation'
+                name 'markovneat' // YOUR LIBRARY NAME
+                description 'Markov chain implementation in Java.'
                 url 'https://github.com/nomemory/markovneat' // YOUR SITE
 
                 licenses {
@@ -28,9 +28,9 @@ install {
                     }
                 }
                 scm {
-                    connection 'https://github.com/nomemory/markovneat' // YOUR GIT REPO
-                    developerConnection 'https://github.com/nomemory/markovneat' // YOUR GIT REPO
-                    url 'https://github.com/nomemory/markovneat' // YOUR SITE
+                    connection 'https://github.com/nomemory/markovneat.git' // YOUR GIT REPO
+                    developerConnection 'https://github.com/nomemory/markovneat.git' // YOUR GIT REPO
+                    url 'https://github.com/nomemory/markovneat.git' // YOUR SITE
 
                 }
             }

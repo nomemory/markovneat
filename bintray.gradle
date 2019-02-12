@@ -1,6 +1,6 @@
 apply plugin: 'com.jfrog.bintray'
 
-version = '1.0'
+version = '1.6'
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
@@ -29,7 +29,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'markovneat'
-        desc = 'Markov Chain java implementation'
+        desc = 'Markov Chain java implementation.'
         websiteUrl = 'https://github.com/nomemory/markovneat'
         vcsUrl = 'https://github.com/nomemory/markovneat.git'
         licenses = ["Apache-2.0"]
