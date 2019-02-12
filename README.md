@@ -14,7 +14,7 @@ gradle shadowJar
 
 The jar will be generated in `/build/libs/markovneat*.jar`.
 
-# Using it
+# Example 1 - Modelling a simple chain
 
 Modelling the following chain:
 
@@ -43,34 +43,10 @@ marketMChain.generate(10000).forEach(System.out::println);
 Output:
 
 ```
-TAGNANT
-BULL
-BULL
-BULL
-BULL
-BULL
-BULL
-BULL
-BULL
-BULL
-BULL
-STAGNANT
 STAGNANT
 BULL
-STAGNANT
-STAGNANT
-BEAR
-BEAR
-BULL
-BEAR
-BEAR
-BEAR
-BEAR
-BEAR
-BEAR
 BULL
 BULL
 BULL
-BULL
-...
+... and so on
 ```
