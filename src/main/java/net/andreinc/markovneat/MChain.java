@@ -18,7 +18,14 @@ public class MChain<T> {
 
     private final int noStates;
 
+    public MChain() {
+        this(1);
+    }
+
     public MChain(final int noStates) {
+        if (noStates < 1) {
+            throw new IllegalArgumentException("The number of states used to create the Markov chain needs to be (>=1)");
+        }
         this.noStates = noStates;
     }
 
@@ -48,11 +55,16 @@ public class MChain<T> {
      * @param elements
      */
     public void train(final T... elements) {
+        if (elements.length < noStates) {
+            throw new IllegalArgumentException("Cannot train a chain with based on a number of elements smaller than noStates.");
+        }
         train(stream(elements).iterator());
     }
 
     /**
      * Trains the markov chain with a sequence of elements.
+     *
+     * The minimum number of the iterator needs to be >= noStates.
      *
      * @param iterator
      */
@@ -112,8 +124,8 @@ public class MChain<T> {
             throw new IllegalArgumentException("Markov chain is empty. Please train the chain first.");
         }
 
-        if (numElements < 0) {
-            throw new IllegalArgumentException("The initial number of elements cannot be negative number.");
+        if (numElements <= 0) {
+            throw new IllegalArgumentException("The initial number of elements cannot be negative or zero. (>0)");
         }
 
         if (!chain.containsKey(initialState)) {

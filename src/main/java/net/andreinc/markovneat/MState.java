@@ -64,11 +64,4 @@ public class MState<T> {
     public int hashCode() {
         return Objects.hash(state);
     }
-
-    @Override
-    public String toString() {
-        return "net.andreinc.markovneat.MState{" +
-                "state=" + state +
-                '}';
-    }
 }

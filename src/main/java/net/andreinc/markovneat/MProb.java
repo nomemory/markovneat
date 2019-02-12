@@ -29,12 +29,5 @@ public class MProb<T> {
         final double value = random.nextDouble() * total;
         return map.higherEntry(value).getValue();
     }
-
-    @Override
-    public String toString() {
-        return "net.andreinc.markovneat.MProb{" +
-                "map=" + map +
-                '}';
-    }
 }
 
