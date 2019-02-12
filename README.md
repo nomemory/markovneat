@@ -16,17 +16,24 @@ The jar will be generated in `/build/libs/markovneat*.jar`.
 
 # Example 1 - Modelling a simple discrete-time markov chain
 
-The following image describes a discrete-time markov chain:
+A directed graph is used bellow to picture the state transitions for a Markov Chain. 
+
+The states represent whether a hypothetical stock market is exhibiting a bull market, bear market, or stagnant market trend during a given week.
+
+(See [Market trends](https://en.wikipedia.org/wiki/Market_trend)).
 
 ![alt text](https://github.com/nomemory/markovneat/blob/master/media/example01.png)
 
-With **markovneat** this can be modelled with the following code:
+With the **markovneat** library this can be modelled using the following code:
 
 ```java
  MChain<String> marketMChain = new MChain<>();
 
+// Transitioning from "BULL" to "BULL" has a 90% chance
 marketMChain.add(new MState<>("BULL"), "BULL", 0.9);
+// Transitioning from "BULL" to "BEAR" has a 7,5% chance
 marketMChain.add(new MState<>("BULL"), "BEAR", 0.075);
+// Transitioning from "BULL" to "STAGNANT" has a 2,5% chance
 marketMChain.add(new MState<>("BULL"), "STAGNANT", 0.025);
 
 marketMChain.add(new MState<>("BEAR"), "BEAR", 0.8);
