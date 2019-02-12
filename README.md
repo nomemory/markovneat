@@ -12,9 +12,65 @@ You can also create a "fat" jar using the `shadowJar` gradle tasks:
 gradle shadowJar
 ```
 
-The jar will be generated in `/build/libs/markovneat-1.0*jar`.
+The jar will be generated in `/build/libs/markovneat*.jar`.
 
 # Using it
 
+Modelling the following chain:
 
+![alt text](https://github.com/nomemory/markovneat/blob/master/media/example01.png)
 
+is as simple as follows:
+
+```java
+ MChain<String> marketMChain = new MChain<>();
+
+marketMChain.add(new MState<>("BULL"), "BULL", 0.9);
+marketMChain.add(new MState<>("BULL"), "BEAR", 0.075);
+marketMChain.add(new MState<>("BULL"), "STAGNANT", 0.025);
+
+marketMChain.add(new MState<>("BEAR"), "BEAR", 0.8);
+marketMChain.add(new MState<>("BEAR"), "BULL", 0.15);
+marketMChain.add(new MState<>("BEAR"), "STAGNANT", 0.05);
+
+marketMChain.add(new MState<>("STAGNANT"), "STAGNANT", 0.5);
+marketMChain.add(new MState<>("STAGNANT"), "BULL", 0.25);
+marketMChain.add(new MState<>("STAGNANT"), "BEAR", 0.25);
+
+marketMChain.generate(10000).forEach(System.out::println);
+```
+
+Output:
+
+```
+TAGNANT
+BULL
+BULL
+BULL
+BULL
+BULL
+BULL
+BULL
+BULL
+BULL
+BULL
+STAGNANT
+STAGNANT
+BULL
+STAGNANT
+STAGNANT
+BEAR
+BEAR
+BULL
+BEAR
+BEAR
+BEAR
+BEAR
+BEAR
+BEAR
+BULL
+BULL
+BULL
+BULL
+...
+```
