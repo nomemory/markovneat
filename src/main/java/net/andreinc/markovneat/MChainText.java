@@ -60,7 +60,7 @@ public class MChainText extends MChain<String> {
     /**
      * Generates random text starting with a supplied initial {@code MState<String>}.
      *
-     * If the state doesn't exist in the chain an {@IllegalArgumentException} is thrown.
+     * If the state doesn't exist in the chain an {@code IllegalArgumentException} is thrown.
      *
      * If the state starts with a "." a new random state will be arbitrary picked form the chain.
      *

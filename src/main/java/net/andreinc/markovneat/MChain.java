@@ -24,7 +24,7 @@ public class MChain<T> {
 
     public MChain(final int noStates) {
         if (noStates < 1) {
-            throw new IllegalArgumentException("The number of states used to create the Markov chain needs to be (>=1)");
+            throw new IllegalArgumentException("The number of states used to create the Markov chain needs to be {@code >= 1}");
         }
         this.noStates = noStates;
     }
@@ -64,7 +64,7 @@ public class MChain<T> {
     /**
      * Trains the markov chain with a sequence of elements.
      *
-     * The minimum number of the iterator needs to be >= noStates.
+     * The minimum number of the iterator needs to be {@code >=} noStates.
      *
      * @param iterator
      */
