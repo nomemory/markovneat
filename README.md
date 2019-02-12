@@ -14,13 +14,13 @@ gradle shadowJar
 
 The jar will be generated in `/build/libs/markovneat*.jar`.
 
-# Example 1 - Modelling a simple chain
+# Example 1 - Modelling a simple discrete-time markov chain
 
-Modelling the following chain:
+The following image describes a discrete-time markov chain:
 
 ![alt text](https://github.com/nomemory/markovneat/blob/master/media/example01.png)
 
-is as simple as follows:
+With **markovneat** this can be modelled with the following code:
 
 ```java
  MChain<String> marketMChain = new MChain<>();
