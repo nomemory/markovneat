@@ -1,6 +1,7 @@
 package net.andreinc.markovneat;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -36,25 +37,29 @@ public class MChainText extends MChain<String> {
      */
     public void train(final Path path) {
         try {
-
-            final Iterator<String> wordsIt = lines(path)
-                                 .map(line -> line.replaceAll("\"", ""))
-                                 .map(MChainText::split)
-                                 .map(words ->
-                                         words
-                                            .stream()
-                                            .map(word -> word.trim().toLowerCase())
-                                            .filter(word -> !"".equals(word))
-                                            .collect(toList())
-                                 )
-                                 .flatMap(List::stream)
-                                 .collect(toList())
-                                 .iterator();
-
-            train(wordsIt);
+            train(Files.readAllLines(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void train(final List<String> lines) {
+        final Iterator<String> wordsIt = lines.stream()
+                                                .map(line -> line.replaceAll("\"", ""))
+                                                .map(MChainText::split)
+                                                .map(words ->
+                                                        words
+                                                                .stream()
+                                                                .map(word -> word.trim().toLowerCase())
+                                                                .filter(word -> !"".equals(word))
+                                                                .collect(toList())
+                                                )
+                                                .flatMap(List::stream)
+                                                .collect(toList())
+                                                .iterator();
+
+        train(wordsIt);
     }
 
     /**
