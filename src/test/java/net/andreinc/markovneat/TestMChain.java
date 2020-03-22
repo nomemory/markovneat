@@ -1,9 +1,10 @@
 package net.andreinc.markovneat;
 
 import org.junit.Test;
+
 import java.util.List;
 
-import static com.google.common.primitives.Booleans.asList;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertTrue;
 
 public class TestMChain {
@@ -77,7 +78,7 @@ public class TestMChain {
     private static boolean isAlternating(final boolean iState, List<Boolean> transitions) {
         Boolean b = iState;
 
-        for(Boolean transition : transitions) {
+        for (Boolean transition : transitions) {
             if (transition != b) {
                 return false;
             }
@@ -99,7 +100,7 @@ public class TestMChain {
     private static MChain<Boolean> trueFalseChainWithTrainArray() {
         MChain<Boolean> mChain = new MChain<>();
 
-        mChain.train(new Boolean[]{ true, false, true });
+        mChain.train(new Boolean[]{true, false, true});
 
         return mChain;
     }

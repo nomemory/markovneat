@@ -8,10 +8,16 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MProb<T> {
 
     private final NavigableMap<Double, T> map = new TreeMap<>();
-    private final Random random = ThreadLocalRandom.current();
+    private final Random random;
     private double total;
 
-    public MProb() {}
+    public MProb() {
+        this(ThreadLocalRandom.current());
+    }
+
+    public MProb(Random random) {
+        this.random = random;
+    }
 
     public MProb<T> add(final double weight, final T result) {
 

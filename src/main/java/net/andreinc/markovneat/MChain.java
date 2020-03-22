@@ -2,9 +2,10 @@ package net.andreinc.markovneat;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static java.util.Arrays.stream;
-import static java.util.concurrent.ThreadLocalRandom.current;
+
 
 /**
  * Markov chain class.
@@ -13,6 +14,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
  */
 public class MChain<T> {
 
+    protected Random random;
     protected Map<MState<T>, MProb<T>> chain = new ConcurrentHashMap<>();
     protected List<MState<T>> states = new ArrayList<>();
 
@@ -22,11 +24,16 @@ public class MChain<T> {
         this(1);
     }
 
-    public MChain(final int noStates) {
+    public MChain(int noStates) {
+        this(noStates, ThreadLocalRandom.current());
+    }
+
+    public MChain(final int noStates, Random random) {
         if (noStates < 1) {
             throw new IllegalArgumentException("The number of states used to create the Markov chain needs to be {@code >= 1}");
         }
         this.noStates = noStates;
+        this.random = random;
     }
 
     /**
@@ -36,12 +43,12 @@ public class MChain<T> {
      * @param element The element where we transition.
      */
     public void add(final MState<T> state, final T element) {
-        chain.putIfAbsent(state, new MProb<>());
+        chain.putIfAbsent(state, new MProb<>(random));
         chain.get(state).add(1, element);
     }
 
     public void add(final MState<T> state, final T element, double weight) {
-        chain.putIfAbsent(state, new MProb<>());
+        chain.putIfAbsent(state, new MProb<>(random));
         chain.get(state).add(weight, element);
     }
 
@@ -108,7 +115,7 @@ public class MChain<T> {
             states = new ArrayList<>(chain.keySet());
         }
 
-        final int idx = current().nextInt(states.size());
+        final int idx = random.nextInt(states.size());
 
         return states.get(idx);
     }
