@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +27,10 @@ public class MChainText extends MChain<String> {
 
     public MChainText(final int noStates) {
         super(noStates);
+    }
+
+    public MChainText(final int noStates, Random random) {
+        super(noStates, random);
     }
 
     /**
