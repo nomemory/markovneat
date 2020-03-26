@@ -6,11 +6,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.Character.toUpperCase;
-import static java.nio.file.Files.lines;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -28,9 +28,13 @@ public class MChainText extends MChain<String> {
         super(noStates);
     }
 
+    public MChainText(final int noStates, Random random) {
+        super(noStates, random);
+    }
+
     /**
      * Trains the chain using a txt file as the source.
-     *
+     * <p>
      * Splits the text into words, removes quotes and trains the chain.
      *
      * @param path The path to the source text file.
@@ -46,32 +50,32 @@ public class MChainText extends MChain<String> {
 
     public void train(final List<String> lines) {
         final Iterator<String> wordsIt = lines.stream()
-                                                .map(line -> line.replaceAll("\"", ""))
-                                                .map(MChainText::split)
-                                                .map(words ->
-                                                        words
-                                                                .stream()
-                                                                .map(word -> word.trim().toLowerCase())
-                                                                .filter(word -> !"".equals(word))
-                                                                .collect(toList())
-                                                )
-                                                .flatMap(List::stream)
-                                                .collect(toList())
-                                                .iterator();
+                .map(line -> line.replaceAll("\"", ""))
+                .map(MChainText::split)
+                .map(words ->
+                        words
+                                .stream()
+                                .map(word -> word.trim().toLowerCase())
+                                .filter(word -> !"".equals(word))
+                                .collect(toList())
+                )
+                .flatMap(List::stream)
+                .collect(toList())
+                .iterator();
 
         train(wordsIt);
     }
 
     /**
      * Generates random text starting with a supplied initial {@code MState<String>}.
-     *
+     * <p>
      * If the state doesn't exist in the chain an {@code IllegalArgumentException} is thrown.
-     *
+     * <p>
      * If the state starts with a "." a new random state will be arbitrary picked form the chain.
      *
      * @param approximateLength The approximate length of the text.
-     *              The generated output can be smaller or bigger than the desired size with a few characters.
-     * @param state The initial state.
+     *                          The generated output can be smaller or bigger than the desired size with a few characters.
+     * @param state             The initial state.
      * @return The arbitrary generated text.
      */
     public String generateText(final MState<String> state, final int approximateLength) {
@@ -93,7 +97,7 @@ public class MChainText extends MChain<String> {
         MState<String> currentState = state;
 
         // Avoid starting the text with punctuation
-        while(isPunctuation(currentState.data().getFirst())) {
+        while (isPunctuation(currentState.data().getFirst())) {
             currentState = randomState();
         }
 
@@ -107,7 +111,7 @@ public class MChainText extends MChain<String> {
 
         // Works until the approximate length is bigger than the actual length.
         String cElement;
-        while(result.length() <= approximateLength) {
+        while (result.length() <= approximateLength) {
 
             // If chain is not cyclic start from a random state again.
             if (!chain.containsKey(currentState)) {
@@ -122,7 +126,7 @@ public class MChainText extends MChain<String> {
 
             // If last element (before the space)
             // in the result buffer is "." capitalise next String
-            if (result.charAt(result.length()-2) == '.') {
+            if (result.charAt(result.length() - 2) == '.') {
                 result.append(capital(cElement));
             } else {
                 result.append(cElement);
@@ -150,13 +154,13 @@ public class MChainText extends MChain<String> {
     /**
      * Appends the initial state to the result buffer (StringBuilder)
      *
-     * @param buff The buffer where the state is appended
+     * @param buff       The buffer where the state is appended
      * @param firstState The initial Markov Chain state
      */
     private static void appendState(final StringBuilder buff, final MState<String> firstState) {
 
         // Append first state to the buffer
-        for(final String element : firstState.data()) {
+        for (final String element : firstState.data()) {
             if (!isPunctuation(element)) {
                 buff.append(' ');
             }
@@ -173,6 +177,7 @@ public class MChainText extends MChain<String> {
 
     /**
      * Capitalise the first letter of a string. Locale is not taken into consideration.
+     *
      * @param element
      * @return
      */
@@ -198,7 +203,7 @@ public class MChainText extends MChain<String> {
         int last = 0;
         int start = 0;
 
-        while(matcher.find()) {
+        while (matcher.find()) {
             start = matcher.start();
 
             if (last != start) {
