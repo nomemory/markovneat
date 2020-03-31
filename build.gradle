@@ -16,7 +16,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 
 group 'net.andreinc'
-version '1.6'
+version '1.8'
 
 repositories {
     mavenCentral()
