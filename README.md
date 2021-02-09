@@ -2,9 +2,19 @@
 
 # Installing 
 
-To install with Maven and Gradle please check the official jcenter() repository url:
+Maven:
+```xml
+<dependency>
+  <groupId>net.andreinc</groupId>
+  <artifactId>markovneat</artifactId>
+  <version>1.8</version>
+</dependency>
+```
 
-[https://bintray.com/nomemory/maven/markovneat](https://bintray.com/nomemory/maven/markovneat)
+Gradle:
+```groovy
+implementation 'net.andreinc:markovneat:1.8'
+```
 
 You can also create a "fat" jar using the `shadowJar` gradle tasks:
 
